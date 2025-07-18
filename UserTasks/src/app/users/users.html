@@ -1,0 +1,27 @@
+
+<div class="bg-slate-800 w-full p-10 flex flex-wrap gap-10">
+    <div class="w-full flex justify-around items-center">
+        <input type="text" [(ngModel)]="searchText" name="search" id="" placeholder="email" class="rounded-lg p-3"> 
+        <button class="bg-neutral-200 p-3 rounded-lg" (click)="filterUsers()">Search</button>
+        <button class="bg-neutral-200 p-3 rounded-lg" (click)="ResetfilterUsers()">Reset</button>
+    </div>
+    @for (user of filteredUsers; track user.id) {
+        <div class="m-10 flex flex-col items-center bg-white rounded-3xl p-5 w-[20rem]">
+            <div >
+                <img class="border-[4px] border-orange-700 rounded-[1000px]"  src={{user.image}} alt="">
+            </div>
+            <div class=" flex flex-col items-center text-center gap-2 mt-4 ">
+                <p class="w-full rounded-md" [ngClass]="{
+                'bg-red-600': user.role === 'admin',
+                'bg-green-600': user.role === 'user',
+                'bg-yellow-500': user.role === 'moderator',
+                'bg-purple-700': user.role === 'banned'
+                }">{{user.role}}</p>
+                <p>{{user.firstName}} {{user.lastName}}</p>
+                <p>{{user.email}}</p>
+                <p>{{user.phone}}</p>
+                <p>{{user.birthDate}}</p>
+            </div>
+        </div>
+    }
+</div>
